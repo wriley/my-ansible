@@ -1,0 +1,4 @@
+---
+# file: roles/common/handlers/main.yml
+- name: restart snmpd
+  service: name=snmpd state=restarted

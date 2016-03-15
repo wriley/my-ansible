@@ -1,0 +1,15 @@
+---
+# file: roles/common/tasks/main.yml
+- name: ensure snmpd is installed
+  apt: name=snmpd state=latest
+  tags: snmp
+
+- name: write the snmpd.conf file
+  template: src=snmpd.conf.j2 dest=/etc/snmp/snmpd.conf
+  notify:
+  - restart snmpd
+  tags: snmp
+
+- name: ensure snmpd is running and enabled at boot
+  service: name=snmpd state=started enabled=yes
+  tags: snmp

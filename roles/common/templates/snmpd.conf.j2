@@ -1,0 +1,8 @@
+com2sec notConfigUser  default {{ vault_snmp_community }}
+group   notConfigGroup v1           notConfigUser
+group   notConfigGroup v2c           notConfigUser
+access  notConfigGroup ""      any       noauth    exact  all  none none
+view all    included  .1                               80
+syslocation St. Louis, MO
+syscontact wrileystl@gmail.com
+dontLogTCPWrappersConnects yes

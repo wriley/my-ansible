@@ -1,0 +1,8 @@
+---
+# file: linux.yml
+- hosts: linux
+  roles:
+    - common
+  gather_facts: no
+  become: yes
+  become_user: root
