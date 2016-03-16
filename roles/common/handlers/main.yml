@@ -2,3 +2,6 @@
 # file: roles/common/handlers/main.yml
 - name: restart snmpd
   service: name=snmpd state=restarted
+
+- name: restart rsyslog
+  service: name=rsyslog state=restarted

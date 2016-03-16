@@ -1,8 +1,15 @@
 ---
 # file: linux.yml
-- hosts: linux
+- hosts: syslog_servers syslog_clients
   roles:
     - common
-  gather_facts: no
+  gather_facts: yes
+  become: yes
+  become_user: root
+
+- hosts: syslog_clients
+  roles:
+    - syslog_client
+  gather_facts: yes
   become: yes
   become_user: root
