@@ -9,3 +9,9 @@
   notify:
   - restart rsyslog
   tags: syslog
+  when: syslog_mode == "remote"
+
+- name: remove the remote syslog config file
+  file: path=/etc/rsyslog.d/99-remote.conf state=absent
+  tags: syslog
+  when: syslog_mode != "remote"
