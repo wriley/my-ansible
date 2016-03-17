@@ -1,3 +1,9 @@
 ---
 # file: site.yml
-- include: linux.yml
+- hosts: linux
+  roles:
+    - common
+    - syslog_client
+  gather_facts: yes
+  become: yes
+  become_user: root
