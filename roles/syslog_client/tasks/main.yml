@@ -1,7 +1,7 @@
 ---
 # file: roles/syslog_client/tasks/main.yml
 - name: ensure rsyslog is installed
-  apt: name=rsyslog state=latest
+  apt: name=rsyslog state=latest update_cache=yes
   tags: syslog
 
 - name: write the remote syslog config file
