@@ -1,0 +1,4 @@
+---
+#file roles/apt-upgrade/tasks/main.yml
+- name: Run apt-upgrade safely
+  apt: update_cache=yes upgrade=safe cache_valid_time=3600

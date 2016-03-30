@@ -1,0 +1,6 @@
+[linux]
+deringer.local syslog_mode=remote
+henry.local syslog_mode=remote
+marlin.local syslog_mode=remote
+observium.local
+zabbix.local syslog_mode=remote
