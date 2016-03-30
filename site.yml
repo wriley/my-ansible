@@ -4,6 +4,7 @@
   roles:
     - common
     - syslog_client
+    - zabbix_agent
   gather_facts: yes
   become: yes
   become_user: root

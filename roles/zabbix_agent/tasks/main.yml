@@ -1,0 +1,46 @@
+---
+# file: roles/zabbix-agent/tasks/main.yml
+- name: Check if zabbix repo package is installed
+  command: dpkg-query -W zabbix-release
+  register: zabbix_release_package_check
+  failed_when: zabbix_release_package_check.rc > 1
+  changed_when: zabbix_release_package_check.rc == 1
+  tags: zabbix-agent
+
+- name: Download zabbix repo package
+  get_url:
+    url="http://repo.zabbix.com/zabbix/3.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_3.0-1+trusty_all.deb"
+    dest="/tmp/zabbix-release_3.0-1+trusty_all.deb"
+  when: zabbix_release_package_check.rc == 1
+  tags: zabbix-agent
+
+- name: Install zabbix repo package
+  apt: deb="/tmp/zabbix-release_3.0-1+trusty_all.deb"
+  when: zabbix_release_package_check.rc == 1
+  tags: zabbix-agent
+
+- name: ensure zabbix agent is installed
+  apt: name=zabbix-agent state=latest update_cache=yes
+  when: zabbix_release_package_check.rc == 0
+  tags: zabbix-agent
+
+- name: create zabbix_agentd.conf
+  template:
+    src=zabbix_agentd.conf.j2
+    dest=/etc/zabbix/zabbix_agentd.conf
+    owner=zabbix
+    group=zabbix
+    mode=0644
+  when: zabbix_release_package_check.rc == 0
+  notify:
+  - restart zabbix-agent
+  tags: zabbix-agent
+
+- name: remove /etc/zabbix/zabbix_agentd.d/userparameter_mysql.conf
+  file:
+    path=/etc/zabbix/zabbix_agentd.d/userparameter_mysql.conf
+    state=absent
+  when: zabbix_release_package_check.rc == 0
+  notify:
+  - restart zabbix-agent
+  tags: zabbix-agent
