@@ -2,7 +2,7 @@
 # file: apt-upgrade.yml
 - hosts: linux
   roles:
-    - apt-upgrade
+    - apt_upgrade
   gather_facts: no
   become: yes
   become_user: root
