@@ -3,6 +3,6 @@ group   notConfigGroup v1           notConfigUser
 group   notConfigGroup v2c           notConfigUser
 access  notConfigGroup ""      any       noauth    exact  all  none none
 view all    included  .1                               80
-syslocation St. Louis, MO
-syscontact wrileystl@gmail.com
+syslocation {{ snmp_location }}
+syscontact {{ snmp_contact }}
 dontLogTCPWrappersConnects yes
