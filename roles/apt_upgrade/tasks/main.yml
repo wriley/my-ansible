@@ -1,7 +1,10 @@
 ---
 #file roles/apt-upgrade/tasks/main.yml
 - name: Ensure aptitude is installed
-  apt: name=aptitude state=latest
+  apt: name=aptitude state=latest update_cache=yes cache_valid_time=3600
+
+- name: Run apt-get autoremove
+  command: apt-get -y autoremove
 
 - name: Run apt-upgrade safely
-  apt: update_cache=yes upgrade=safe cache_valid_time=3600 autoremove=yes
+  apt: update_cache=yes upgrade=safe cache_valid_time=3600
