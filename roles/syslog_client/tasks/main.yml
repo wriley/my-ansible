@@ -1,7 +1,7 @@
 ---
 # file: roles/syslog_client/tasks/main.yml
 - name: ensure rsyslog is installed
-  apt: name=rsyslog state=latest update_cache=yes
+  apt: name=rsyslog state=latest update_cache=yes cache_valid_time=3600
   tags: syslog
 
 - name: write the remote syslog config file
@@ -13,5 +13,7 @@
 
 - name: remove the remote syslog config file
   file: path=/etc/rsyslog.d/99-remote.conf state=absent
+  notify:
+  - restart rsyslog
   tags: syslog
   when: syslog_mode != "remote"

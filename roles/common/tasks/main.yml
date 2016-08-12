@@ -1,7 +1,7 @@
 ---
 # file: roles/common/tasks/main.yml
 - name: ensure snmpd is installed
-  apt: name=snmpd state=latest update_cache=yes
+  apt: name=snmpd state=latest update_cache=yes cache_valid_time=3600
   tags: snmp
 
 - name: write the snmpd.conf file
