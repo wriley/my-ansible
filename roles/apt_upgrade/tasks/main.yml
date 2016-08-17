@@ -3,6 +3,9 @@
 - name: Ensure aptitude is installed
   apt: name=aptitude state=latest update_cache=yes cache_valid_time=3600
 
+- name: Run apt-get autoclean
+  command: apt-get -y autoclean
+
 - name: Run apt-get autoremove
   command: apt-get -y autoremove
 
