@@ -1,5 +1,6 @@
 [linux]
 deringer.local
 henry.local
+mqtt.local
 rusty.local
 zabbix.local
