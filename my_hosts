@@ -1,6 +1,8 @@
 [linux]
 deringer.local
 henry.local
-mqtt.local
-rusty.local
+zabbix.local
+
+[linux-reboot]
+deringer.local
 zabbix.local

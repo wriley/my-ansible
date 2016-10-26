@@ -11,3 +11,7 @@
 
 - name: Run apt-upgrade safely
   apt: update_cache=yes upgrade=safe cache_valid_time=3600
+
+- name: Reboot system if required
+  command: shutdown -r now 'Rebooting to complete system upgrade' removes=/var/run/reboot-required
+  when: "'henry' not in inventory_hostname"
