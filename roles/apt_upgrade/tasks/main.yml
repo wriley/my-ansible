@@ -13,5 +13,19 @@
   apt: update_cache=yes upgrade=safe cache_valid_time=3600
 
 - name: Reboot system if required
-  command: shutdown -r now 'Rebooting to complete system upgrade' removes=/var/run/reboot-required
+  command: shutdown -r 1 "Rebooting to complete system upgrade" removes=/var/run/reboot-required
   when: "'henry' not in inventory_hostname"
+  async: 0
+  poll: 0
+  ignore_errors: true
+  register: rebooting
+
+- name: Wait for server to reboot...
+  local_action: wait_for
+    host={{ inventory_hostname }}
+    port=22
+    state=started
+    delay=65
+    timeout=120
+  become: false
+  when: rebooting
