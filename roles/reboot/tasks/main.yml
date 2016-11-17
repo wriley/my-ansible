@@ -1,6 +1,6 @@
 ---
 - name: Check for reboot hint.
-  shell: LAST_KERNEL=$(basename $(ls '/boot/vmlinuz-*' | sort | tail -1) | cut -d- -f2-); CURRENT_KERNEL=$(uname -r); if [ $LAST_KERNEL != $CURRENT_KERNEL ]; then echo 'reboot'; else echo 'no'; fi
+  shell: LAST_KERNEL=$(basename $(ls "/boot/vmlinuz-*" | sort | tail -1) | cut -d- -f2-); CURRENT_KERNEL=$(uname -r); if [ $LAST_KERNEL != $CURRENT_KERNEL ]; then echo 'reboot'; else echo 'no'; fi
   ignore_errors: true
   register: reboot_hint
 
