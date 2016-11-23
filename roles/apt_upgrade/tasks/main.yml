@@ -6,11 +6,11 @@
 - name: Run apt-get autoclean
   command: apt-get -y autoclean
 
-- name: Run apt-get autoremove
-  command: apt-get -y autoremove
-
 - name: Run apt-upgrade safely
   apt: update_cache=yes upgrade=safe cache_valid_time=3600
+
+- name: Run apt-get autoremove
+  command: apt-get -y autoremove
 
 - name: Reboot system if required
   command: /sbin/reboot removes=/var/run/reboot-required
