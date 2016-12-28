@@ -44,3 +44,6 @@
   notify:
   - restart zabbix-agent
   tags: zabbix-agent
+
+- name: enable zabbix agent
+  service: name=zabbix-agent enabled=yes state=started
