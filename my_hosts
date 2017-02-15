@@ -1,12 +1,8 @@
 [linux]
 deringer.local
 henry.local
-openhab.local
-mqtt.local
 zabbix.local
 
 [linux-reboot]
 deringer.local
-openhab.local
-mqtt.local
 zabbix.local
