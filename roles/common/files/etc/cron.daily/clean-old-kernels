@@ -1,0 +1,8 @@
+#!/bin/bash
+ALL_KERNELS=$(ls /boot/initrd.img-4.4.0-*)
+OLD_KERNELS=$(for kernel in $ALL_KERNELS ; do echo "linux-image${kernel##*img}" | grep -v $(uname -r) ; done)
+
+if [ -n "$OLD_KERNELS" ]; then
+    apt-get -y remove $OLD_KERNELS
+    update-grub
+fi

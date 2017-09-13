@@ -13,3 +13,6 @@
 - name: ensure snmpd is running and enabled at boot
   service: name=snmpd state=started enabled=yes
   tags: snmp
+
+- name: install cron job to purge old kernels
+  copy: src=etc/cron.daily/clean-old-kernels dest=/etc/cron.daily/clean-old-kernels owner=root group=root mode=0555
