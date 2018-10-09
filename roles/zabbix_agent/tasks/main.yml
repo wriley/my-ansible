@@ -11,12 +11,32 @@
   get_url:
     url="http://repo.zabbix.com/zabbix/3.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_3.0-1+trusty_all.deb"
     dest="/tmp/zabbix-release_3.0-1+trusty_all.deb"
-  when: zabbix_release_package_check.rc == 1
+  when:
+    - zabbix_release_package_check.rc == 1
+    - ansible_distribution_version < 16
+  tags: zabbix-agent
+
+- name: Download zabbix repo package (16+)
+  get_url:
+    url="http://repo.zabbix.com/zabbix/3.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_3.0-2%2Bxenial_all.deb"
+    dest="/tmp/zabbix-release_3.0-1+trusty_all.deb"
+  when:
+    - zabbix_release_package_check.rc == 1
+    - ansible_distribution_version >= 16
   tags: zabbix-agent
 
 - name: Install zabbix repo package
   apt: deb="/tmp/zabbix-release_3.0-1+trusty_all.deb"
-  when: zabbix_release_package_check.rc == 1
+  when:
+    - zabbix_release_package_check.rc == 1
+    - ansible_distribution_version < 16
+  tags: zabbix-agent
+
+- name: Install zabbix repo package (16+)
+  apt: deb="/tmp/zabbix-release_3.0-1+trusty_all.deb"
+  when:
+    - zabbix_release_package_check.rc == 1
+    - ansible_distribution_version >= 16
   tags: zabbix-agent
 
 - name: ensure zabbix agent is installed
@@ -47,3 +67,4 @@
 
 - name: enable zabbix agent
   service: name=zabbix-agent enabled=yes state=started
+  when: zabbix_release_package_check.rc == 0

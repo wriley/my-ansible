@@ -13,5 +13,12 @@
   register: rebooting
 
 - name: Wait for thing to reboot...
-  pause: seconds=45
+  local_action:
+    module: wait_for
+    host: {{ ansible_ssh_host }}
+    state: started
+    port: 22
+    delay: 30
+    timeout: 300
+    connect_timeout: 15
   when: rebooting

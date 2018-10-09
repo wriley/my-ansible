@@ -3,16 +3,31 @@
 - name: ensure snmpd is installed
   apt: name=snmpd state=latest update_cache=yes cache_valid_time=3600
   tags: snmp
+  when:
+    - ansible_distribution_version < 16
 
 - name: write the snmpd.conf file
   template: src=snmpd.conf.j2 dest=/etc/snmp/snmpd.conf
   notify:
   - restart snmpd
   tags: snmp
+  when:
+    - ansible_distribution_version < 16
 
 - name: ensure snmpd is running and enabled at boot
   service: name=snmpd state=started enabled=yes
   tags: snmp
+  when:
+    - ansible_distribution_version < 16
 
 - name: install cron job to purge old kernels
   copy: src=etc/cron.daily/clean-old-kernels dest=/etc/cron.daily/clean-old-kernels owner=root group=root mode=0555
+
+- name: ensure ntp is installed
+  apt: name=ntp state=latest update_cache=yes cache_valid_time=3600
+  tags: ntp
+
+- name: update the ntp.conf file
+  lineinfile: path=/etc/ntp.conf line='server 192.168.76.254 prefer iburst'
+  notify:
+  - restart ntp

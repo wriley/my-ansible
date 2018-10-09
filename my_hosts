@@ -1,8 +1,19 @@
 [linux]
-deringer.local
 henry.local
+deringer.local
 zabbix.local
+colt.local
+marlin.local
 
 [linux-reboot]
 deringer.local
 zabbix.local
+colt.local
+pi01.local
+marlin.local
+
+[pies]
+pi01.local
+
+[pies-reboot]
+pi01.local
