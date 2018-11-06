@@ -1,19 +1,29 @@
 [linux]
-henry.local
-deringer.local
-zabbix.local
-colt.local
-marlin.local
+henry
+deringer
+zabbix
+colt
+marlin
+hc1
+hc2
+vostro
 
 [linux-reboot]
-deringer.local
-zabbix.local
-colt.local
-pi01.local
-marlin.local
+deringer
+zabbix
+colt
+marlin
+hc1
+hc2
+vostro
 
-[pies]
-pi01.local
+[seti]
+hc1
+hc2
+vostro
 
-[pies-reboot]
-pi01.local
+[arma3]
+marlin
+hc1
+hc2
+vostro
